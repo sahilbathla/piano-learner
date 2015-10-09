@@ -168,4 +168,6 @@ function goToStep(n) {
 	$('.step' + n).show();
 }
 
-init();
+$(function() {
+	init();
+});
