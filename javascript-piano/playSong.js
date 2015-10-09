@@ -1,25 +1,15 @@
 function resetSongStates() {
 	isSongPaused = false;
-	isSongStopped = false;
+	isSongStopped = true;
 	shouldReplaySong = false;
 	isUserPlaying = false;
 	currentNoteIndex = 0;
 	isDemoPlaying = false;
-}
-
-var actions = {
-	stopSong: function () {
-		isSongStopped = false;
-		if (shouldReplaySong) {
-			shouldReplaySong = false;
-			playSong();
-		}
-		return;
-	}
+	isSongStoppedInitiated = false;
 }
 
 function showPause() {
-	$('#pause').show();
+	$('#pause').text('Pause').show();
 	$('#play').hide();
 }
 
@@ -31,11 +21,14 @@ function showPlay() {
 function playSong() {
 	resetSongStates();
 	isDemoPlaying = true;
+	isSongStopped = false;
 	showPause();
 	var	callback = function(k) {
 		if (k < data.length) {
-			if (isSongStopped) {
-				actions.stopSong();
+			if (isSongStoppedInitiated) {
+				isSongStoppedInitiated = false;
+				isSongStopped = true;
+				return;
 			}
 			else if (!isSongPaused) {
 				var e = jQuery.Event('keydown');
@@ -110,15 +103,25 @@ function pauseSong() {
 	}
 }
 
-function stopSong() {
-	isSongStopped = true;
+function stopSong(callback) {
+	callback = callback || function() {}
+	if (!isDemoPlaying) {
+		isSongStopped = true;
+		callback();
+	} else {
+		isSongStoppedInitiated = true;
+		var x = window.setInterval(function () {
+			if(isSongStopped) {
+				callback();
+				clearInterval(x);
+			}
+		}, 100);
+	}
 	showPlay();
 }
 
 function replaySong() {
-	stopSong();
-	shouldReplaySong = true;
-	playSong();
+	stopSong(function() { playSong(); });
 }
 
 //Let the user play the song
@@ -161,6 +164,7 @@ function init() {
 	$('.wrong, .letter').removeClass('hidden').hide();
 	goToStep(1);
 	showPlay();
+	resetSongStates();
 }
 
 function goToStep(n) {
