@@ -293,3 +293,18 @@ h1 {
 .hidden {
     display: none;
 }
+
+.wrong, .letter {
+    position: absolute;
+    left: 300px;
+    top: 100px;
+    z-index: 3;
+    font-size: 300px;
+    color:#078EAD;
+}
+
+.letter {
+    top: 300px;
+    width:300px;
+    text-align: center;
+}

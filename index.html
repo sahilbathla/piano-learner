@@ -10,6 +10,8 @@
     </head>
     <body style="background-image:url('table.jpg')">
         <div id="content">
+            <img src="wrong.png" class="wrong"></img>
+            <div class="letter"></div>
             <div id="content-inner">
                 <div style="margin-left:100px; color:white; font-size:30px; cursor: pointer" onclick="showMenu();">Menu</div>
                 <div id="piano" style="background-color: #434343">
@@ -36,18 +38,29 @@
                     <div class="loop" tabindex="2">loop</div>
                 </div>
                 <div id="playMenu" class="hidden" style="margin-top: 20px;">
-                    <span class="learnOptions">Try</span>
-                    <span class="learnOptions" onclick="pauseSong()">Pause</span>
+                    <span class="learnOptions" onclick="userPlay()">Try</span>
+                    <span id="play" class="learnOptions" onclick="playSong()">Play</span>
+                    <span id="pause" class="learnOptions" onclick="pauseSong()">Pause</span>
                     <span class="learnOptions" onclick="replaySong()">Replay</span>
                 </div>
             </div>
         </div>
         <div id="menu" style="width:500px; background-color:white; border-radius:5px; position:absolute; top:150px; left:400px; padding:10px;z-index:5">
-            <p style="margin:0 auto;width:200px">What would you like to do?</p>
-            <ul>
-                <li style="cursor:pointer;" onClick="hideMenu()">Free Play</li>
-                <li style="cursor:pointer;" onClick="startLesson()">Learn A Song(Happy Birthday)</li>
-            </ul>
+            <div class="step1 step">
+                <p style="margin:0 auto;width:200px">What would you like to do?</p>
+                <ul>
+                    <li style="cursor:pointer;" onClick="hideMenu()">Free Play (White Keys - A to Enter)</li>
+                    <li style="cursor:pointer;" onClick="goToStep(2)">Learn A Song (Happy Birthday)</li>
+                </ul>
+            </div>
+            <div class="step2 step">
+                To play the song press <span style="color:black">Play</span>.<br/>
+                To pause the song press <span style="color:black">Pause</span> anytime.<br/>
+                To replay press the <span style="color:black">Replay</span> button.<br/>
+                To try playing the song press <span style="color:black">Try</span>.<br/><br/>
+                Note:- You will have to restart from beginning if you press wrong keys
+                <button onclick="startLesson()">Start Lesson</button>
+            </div>
         </div>
         <!-- <h1 style="position: absolute;top:150px;text-align: center;left:275px;cursor:pointer;font-size:50px" onclick="playSong();">Click To Piano</h1> -->
        <!--  <div id="below">

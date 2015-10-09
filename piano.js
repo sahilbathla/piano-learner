@@ -76,7 +76,27 @@
             var $key = $('<div>', {
                 'class': 'key' + blackKeyClass(i),
                 'data-key': i,
-                mousedown: function(evt) { $keys.trigger('note-'+i+'.play'); }
+                mousedown: function(evt) {
+                    $keys.trigger('note-'+i+'.play');
+                    //Check if user playing - Sahil
+                    if (window.isUserPlaying) {
+                        var key = i - notesOffset - notesShift, found = false;
+                        for (var keyCode in keyNotes) {
+                            if (keyNotes[keyCode] === key) {
+                                found = keyCode;
+                                break;
+                            }
+                        }
+                        if (found) {
+                            if(found !== data[currentNoteIndex].key + '') {
+                                showWrong(3);
+                                currentNoteIndex = 0;
+                            } else {
+                                currentNoteIndex++;
+                            }
+                        }
+                    }
+                }
             }).appendTo($keys);
         }
 
@@ -164,6 +184,34 @@
         /*n*/78: 23,
         /*m*/77: 24
     };
+
+    window.keyMapping = {
+        /*a*/ 65: 'a', // c
+        /*w*/ 87: 'w', // c#
+        /*s*/ 83: 's', // d
+        /*e*/ 69: 'e', // d#
+        /*d*/ 68: 'd', // e
+        /*f*/ 70: 'f', // f
+        /*t*/ 84: 't', // f#
+        /*g*/ 71: 'g', // g
+        /*y*/ 89: 'y', // g#
+        /*h*/ 72: 'h', // a
+        /*u*/ 85: 'u', // a#
+        /*j*/ 74: 'j', // b
+        /*k*/ 75: 'k', // c
+        /*o*/ 79: 'o', // c#
+        /*l*/ 76: 'l', // d
+        /*p*/ 80: 'p', // d#
+        /*;*/ 186: ';', // e
+        /*;*/ 59: ';', // e ... gotta figure out why it's sometimes 186 and sometimes 59
+        /*,*/ 222: ',', // f
+        /*]*/ 221: ']', // f#
+        /*enter*/ 13: '⏎', // g
+        /*b*/66: 'b',
+        /*n*/78: 'n',
+        /*m*/77: 'm'
+    }
+    window.keysAvailable = Object.keys(keyNotes);
     var notesShift = -12;
     var downKeys = {};
 
@@ -177,7 +225,7 @@
             evt.preventDefault();
         }
         // prevent repeating keys
-        if (!downKeys[keyCode] && !isModifierKey(evt)) {
+        if ((!downKeys[keyCode] && !isModifierKey(evt)) || window.isDemoPlaying) {
             downKeys[keyCode] = 1;
             var key = keyNotes[keyCode];
             if (typeof key != 'undefined') {
