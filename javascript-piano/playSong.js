@@ -158,7 +158,7 @@ function userPlay() {
 
 function init() {
 	userPlayListener();
-	$('.wrong, .letter').hide();
+	$('.wrong, .letter').removeClass('hidden').hide();
 	goToStep(1);
 	showPlay();
 }
