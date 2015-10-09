@@ -159,7 +159,10 @@
         /*;*/ 59: 16, // e ... gotta figure out why it's sometimes 186 and sometimes 59
         /*,*/ 222: 17, // f
         /*]*/ 221: 18, // f#
-        /*enter*/ 13: 19 // g
+        /*enter*/ 13: 19, // g
+        /*b*/66: 21,
+        /*n*/78: 23,
+        /*m*/77: 24
     };
     var notesShift = -12;
     var downKeys = {};
@@ -170,6 +173,9 @@
 
     $(window).keydown(function(evt) {
         var keyCode = evt.keyCode;
+        if (keyCode === 32) {
+            evt.preventDefault();
+        }
         // prevent repeating keys
         if (!downKeys[keyCode] && !isModifierKey(evt)) {
             downKeys[keyCode] = 1;
@@ -199,7 +205,7 @@
         curColor = 0;
 
     function colorHandler(evt) {
-        if (evt.type === 'click' || (evt.keyCode == 67 && !isModifierKey(evt))) {
+        if (evt.type === 'click' || (evt.keyCode == 67 && !isModifierKey(evt)) && false) {
             if (++curColor >= colors.length) curColor = 0;
             document.getElementById('piano').style.backgroundColor = '#' + colors[curColor];
         }
@@ -400,7 +406,8 @@
         }
 
         function demoHandler(evt) {
-            if (evt.type === 'click' || (evt.keyCode == 77 && !isModifierKey(evt))) {
+            //hack - sahil
+            if (evt.type === 'click' || (evt.keyCode == 77 && !isModifierKey(evt)) && false) {
                 if (demoing) {
                     demoing = false;
                     window.clearTimeout(demoingTimeout);

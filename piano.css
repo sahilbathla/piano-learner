@@ -13,7 +13,7 @@ html {
 strong { font-weight: normal; }
 a { text-decoration: none; }
 
-html, body { height: 100%; }
+html, body { height: 100%; overflow: hidden;}
 
 #content {
     min-height: 100%;
@@ -27,7 +27,7 @@ html, body { height: 100%; }
 
 #piano {
     position: relative;
-    margin: 0 auto;
+    margin: 50px 0px 0px 10px ;
     padding: 80px 40px 16px;
     width: 782px;
     background: #f33;
@@ -278,4 +278,18 @@ h1 {
     line-height: 20px;
     text-align: center;
     z-index: 999;
+}
+
+
+/* Lean css */
+
+.learnOptions {
+    color: white;
+    margin-left: 160px;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.hidden {
+    display: none;
 }

@@ -8,10 +8,11 @@
         <meta property="og:image" content="http://mrcoles.com/media/img/piano-visual-mode.png">
         <link rel="image_src" href="http://mrcoles.com/media/img/piano-visual-mode.png" />
     </head>
-    <body>
+    <body style="background-image:url('table.jpg')">
         <div id="content">
             <div id="content-inner">
-                <div id="piano">
+                <div style="margin-left:100px; color:white; font-size:30px; cursor: pointer" onclick="showMenu();">Menu</div>
+                <div id="piano" style="background-color: #434343">
                     <h1>Javascript Piano</h1>
                     <div class="help show" tabindex="1">
                         <div class="help-inner">
@@ -34,9 +35,22 @@
                     </div>
                     <div class="loop" tabindex="2">loop</div>
                 </div>
+                <div id="playMenu" class="hidden" style="margin-top: 20px;">
+                    <span class="learnOptions">Try</span>
+                    <span class="learnOptions" onclick="pauseSong()">Pause</span>
+                    <span class="learnOptions" onclick="replaySong()">Replay</span>
+                </div>
             </div>
         </div>
-        <div id="below">
+        <div id="menu" style="width:500px; background-color:white; border-radius:5px; position:absolute; top:150px; left:400px; padding:10px;z-index:5">
+            <p style="margin:0 auto;width:200px">What would you like to do?</p>
+            <ul>
+                <li style="cursor:pointer;" onClick="hideMenu()">Free Play</li>
+                <li style="cursor:pointer;" onClick="startLesson()">Learn A Song(Happy Birthday)</li>
+            </ul>
+        </div>
+        <!-- <h1 style="position: absolute;top:150px;text-align: center;left:275px;cursor:pointer;font-size:50px" onclick="playSong();">Click To Piano</h1> -->
+       <!--  <div id="below">
             <p id="info">info</p>
             <p id="top">↑</p>
             <div id="below-inner">
@@ -58,9 +72,10 @@
             </div>
             <a href="https://twitter.com/share" class="twitter-share-button" data-url="http://mrcoles.com/piano/" data-text="HTML5 Piano - with a data URI synth" data-via="lethys">Tweet</a>
 <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
-        </div>
+        </div> -->
         <script src="jquery-1.7.1.min.js"></script>
         <script src="audio.js"></script>
         <script src="piano.js"></script>
+        <script src="playSong.js"></script>
     </body>
 </html>
