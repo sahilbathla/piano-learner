@@ -27,6 +27,7 @@ function playSong() {
 		if (k < data.length) {
 			if (isSongStoppedInitiated) {
 				isSongStoppedInitiated = false;
+				isDemoPlaying = false;
 				isSongStopped = true;
 				return;
 			}
@@ -41,6 +42,8 @@ function playSong() {
 				setTimeout(function() { callback(k) }, 10);
 			}
 		} else {
+			isDemoPlaying = false;
+			isSongStopped = true;
 			showPlay();
 		}
 	};
