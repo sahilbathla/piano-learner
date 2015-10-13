@@ -226,7 +226,7 @@
         }
         // prevent repeating keys
         if ((!downKeys[keyCode] && !isModifierKey(evt)) || window.isDemoPlaying) {
-            downKeys[keyCode] = 1;
+            downKeys[keyCode] = 0; //was 1 (change by Sahil)
             var key = keyNotes[keyCode];
             if (typeof key != 'undefined') {
                 $keys.trigger('note-'+(key+notesShift+notesOffset)+'.play');
